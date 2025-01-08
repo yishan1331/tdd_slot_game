@@ -9,20 +9,20 @@ def slot_score_calculator():
 
 def test_lose(slot_score_calculator):
     wheels = [
-        ['A', '1', '2'],
-        ['A', '1', '2'],
-        ['A', '1', '2'],
-        ['A', '1', '2'],
-        ['1', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['2', '3', '4'],
     ]
     assert slot_score_calculator(wheels).calculate(10) == 0
 
 def test_one_line(slot_score_calculator):
     wheels = [
-        ['A', '1', '2'],
-        ['A', '1', '2'],
-        ['A', '1', '2'],
-        ['A', '1', '2'],
         ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '3', '4'],
     ]
     assert slot_score_calculator(wheels).calculate(10) == 400
