@@ -26,3 +26,13 @@ def test_one_line(slot_score_calculator):
         ['A', '3', '4'],
     ]
     assert slot_score_calculator(wheels).calculate(10) == 100
+
+def test_two_line(slot_score_calculator):
+    wheels = [
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '4'],
+    ]
+    assert slot_score_calculator(wheels).calculate(10) == 400
