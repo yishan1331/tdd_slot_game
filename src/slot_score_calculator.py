@@ -20,6 +20,8 @@ class SlotScoreCalculator:
 
         except Exception as error:
             print(error)
+            return str(error)
+
     def _get_odd(self):
         try:
             same_line = self._get_lines()
@@ -29,6 +31,7 @@ class SlotScoreCalculator:
 
         except Exception as error:
             print(error)
+            return str(error)
 
     def calculate(self, bet):
         self.odd = self._get_odd()
