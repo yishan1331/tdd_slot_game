@@ -9,8 +9,8 @@ class SlotScoreCalculator:
     def __init__(self, wheels):
         self.odd = 0
         self.wheels = wheels
-
-    def calculate(self, bet):
+    
+    def _get_odd(self):
         try:
             transposed = list(zip(*self.wheels))
 
@@ -21,8 +21,11 @@ class SlotScoreCalculator:
 
             if same_line not in self.PAYTABLE:
                 raise RuntimeError('TBD')
-            self.odd = self.PAYTABLE[same_line]
-            return self.odd * bet
+            return self.PAYTABLE[same_line]
 
         except Exception as error:
             print(error)
+
+    def calculate(self, bet):
+        self.odd = self._get_odd()
+        return self.odd * bet
