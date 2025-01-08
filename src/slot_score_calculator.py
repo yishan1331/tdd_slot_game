@@ -12,5 +12,5 @@ class SlotScoreCalculator:
             if len(set(column)) == 1:
                 same_line += 1
 
-        if same_line == 1: self.odd = 40
+        if same_line == 1: self.odd = 10
         return self.odd * bet

@@ -25,4 +25,4 @@ def test_one_line(slot_score_calculator):
         ['A', '2', '3'],
         ['A', '3', '4'],
     ]
-    assert slot_score_calculator(wheels).calculate(10) == 400
+    assert slot_score_calculator(wheels).calculate(10) == 100
