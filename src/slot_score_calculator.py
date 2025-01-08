@@ -1,4 +1,6 @@
 
+import random
+
 class SlotScoreCalculator:
     PAYTABLE = {
         0: 0,
@@ -6,9 +8,10 @@ class SlotScoreCalculator:
         2: 40,
         3: 100
     }
-    def __init__(self, wheels):
+    def __init__(self, wheels=None, randomNum=None):
         self.odd = 0
         self.wheels = wheels
+        self.randomNum = randomNum
     
     def _get_lines(self, screen):
         try:
@@ -33,9 +36,16 @@ class SlotScoreCalculator:
             print(error)
             return str(error)
 
-    def calculate(self, bet):
+    def spin_wheels(self, wheels):
+        position = random.randint(0, len(wheels)-1)
+        return wheels[position]
 
-        screen = self.wheels
+    def calculate(self, bet):
+        screen = []
+        for wheel in self.wheels:
+            next_idx = self.randomNum
+            column = wheel[next_idx:next_idx + 3]
+            screen.append(column)
 
         self.odd = self._get_odd(screen)
         return self.odd * bet
