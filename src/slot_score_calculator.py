@@ -8,10 +8,10 @@ class SlotScoreCalculator:
         2: 40,
         3: 100
     }
-    def __init__(self, wheels=None, randomNum=None):
+    def __init__(self, wheels=None, random_num=None):
         self.odd = 0
         self.wheels = wheels
-        self.randomNum = randomNum
+        self.random_num = random_num
     
     def _get_lines(self, screen):
         try:
@@ -43,9 +43,7 @@ class SlotScoreCalculator:
     def calculate(self, bet):
         screen = []
         for wheel in self.wheels:
-            next_idx = self.randomNum
-            column = wheel[next_idx:next_idx + 3]
+            column = [wheel[(self.random_num + i) % len(wheel)] for i in range(3)]
             screen.append(column)
-
         self.odd = self._get_odd(screen)
         return self.odd * bet
