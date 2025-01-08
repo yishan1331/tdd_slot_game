@@ -8,9 +8,9 @@ class SlotScoreCalculator:
         2: 40,
         3: 100
     }
-    def __init__(self, wheels=None, random_num=None):
+    def __init__(self, reels=None, random_num=None):
         self.odd = 0
-        self.wheels = wheels
+        self.reels = reels
         self.random_num = random_num
     
     def _get_lines(self, screen):
@@ -36,14 +36,13 @@ class SlotScoreCalculator:
             print(error)
             return str(error)
 
-    def spin_wheels(self, wheels):
-        position = random.randint(0, len(wheels)-1)
-        return wheels[position]
+    def spin_single_reel(self, random_num):
+        return [self.reels[(random_num + i) % len(self.reels)] for i in range(3)]
 
     def calculate(self, bet):
         screen = []
-        for wheel in self.wheels:
-            column = [wheel[(self.random_num + i) % len(wheel)] for i in range(3)]
+        for reel in self.reels:
+            column = [reel[(self.random_num + i) % len(reel)] for i in range(3)]
             screen.append(column)
         self.odd = self._get_odd(screen)
         return self.odd * bet
