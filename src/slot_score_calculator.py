@@ -10,10 +10,10 @@ class SlotScoreCalculator:
         self.odd = 0
         self.wheels = wheels
     
-    def _get_lines(self):
+    def _get_lines(self, screen):
         try:
             same_line = 0
-            for column in list(zip(*self.wheels)):
+            for column in list(zip(*screen)):
                 if len(set(column)) == 1:
                     same_line += 1
             return same_line
@@ -22,11 +22,11 @@ class SlotScoreCalculator:
             print(error)
             return str(error)
 
-    def _get_odd(self):
+    def _get_odd(self, screen):
         try:
-            same_line = self._get_lines()
+            same_line = self._get_lines(screen)
             if same_line not in self.PAYTABLE:
-                raise RuntimeError('TBD')
+                raise RuntimeError('Unsupported lines')
             return self.PAYTABLE[same_line]
 
         except Exception as error:
@@ -34,5 +34,8 @@ class SlotScoreCalculator:
             return str(error)
 
     def calculate(self, bet):
-        self.odd = self._get_odd()
+
+        screen = self.wheels
+
+        self.odd = self._get_odd(screen)
         return self.odd * bet
