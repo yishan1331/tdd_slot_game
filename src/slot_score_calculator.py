@@ -1,7 +1,3 @@
-
-
-from .reels import Reels
-
 class SlotScoreCalculator:
     
     def __init__(self, pay_table=None, reels=None):
