@@ -7,13 +7,8 @@ class Reels:
         self.random_num = random_num
 
     def reels_to_screen(self):
-        try:
-            raw_screen = []
-            for reel in self.raw_reels:
-                column = [reel[(self.random_num + i) % len(reel)] for i in range(3)]
-                raw_screen.append(column)
-            return Screen(raw_screen)
-
-        except Exception as error:
-            print(error)
-            return str(error)
+        raw_screen = []
+        for reel in self.raw_reels:
+            column = [reel[(self.random_num + i) % len(reel)] for i in range(3)]
+            raw_screen.append(column)
+        return Screen(raw_screen)
