@@ -1,0 +1,2 @@
+class PreConditionViolatedException(RuntimeError):
+    pass
