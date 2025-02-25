@@ -4,10 +4,10 @@ from .reels import Reels
 
 class SlotScoreCalculator:
     
-    def __init__(self, pay_table=None, raw_reels=None, random_num=None):
+    def __init__(self, pay_table=None, reels=None):
         self.odd = 0
         self.pay_table = pay_table
-        self.reels = Reels(raw_reels, random_num)
+        self.reels = reels
 
     def spin_single_reel(self):
         return [self.reels.raw_reels[(self.reels.random_num + i) % len(self.reels.raw_reels)] for i in range(3)]
