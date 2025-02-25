@@ -2,16 +2,19 @@ import random
 from .screen import Screen
 
 class Reels:
-    def __init__(self, raw_reels, random_num=0):
+    def __init__(self, raw_reels, random_num=None):
         self.raw_reels = raw_reels
         self.random_num = random_num
-        if isinstance(random_num, int):
-            self.random_num = [random_num] * len(self.raw_reels)
-        elif isinstance(random_num, list):
-            if len(random_num) > len(self.raw_reels):
-                self.random_num = random_num[:len(self.raw_reels)]
-            else:
-                self.random_num = random_num+[0]*(len(self.raw_reels)-len(random_num))
+        if random_num is None:
+            self.random_num = [random.randint(0, len(self.raw_reels) - 1) for _ in raw_reels]
+        else:
+            if isinstance(random_num, int):
+                self.random_num = [random_num] * len(self.raw_reels)
+            elif isinstance(random_num, list):
+                if len(random_num) > len(self.raw_reels):
+                    self.random_num = random_num[:len(self.raw_reels)]
+                elif len(random_num) < len(self.raw_reels):
+                    self.random_num = random_num+[random.randint(0, len(self.raw_reels) - 1)]*(len(self.raw_reels)-len(random_num))
 
     def reels_to_screen(self):
         raw_screen = []
