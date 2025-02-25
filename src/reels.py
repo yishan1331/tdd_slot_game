@@ -1,4 +1,5 @@
 import random
+from .screen import Screen
 
 class Reels:
     def __init__(self, raw_reels, random_num):
@@ -7,11 +8,11 @@ class Reels:
 
     def reels_to_screen(self):
         try:
-            screen = []
+            raw_screen = []
             for reel in self.raw_reels:
                 column = [reel[(self.random_num + i) % len(reel)] for i in range(3)]
-                screen.append(column)
-            return screen
+                raw_screen.append(column)
+            return Screen(raw_screen)
 
         except Exception as error:
             print(error)

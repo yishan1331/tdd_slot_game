@@ -1,5 +1,5 @@
 
-from .screen import Screen
+
 from .reels import Reels
 
 class SlotScoreCalculator:
@@ -13,7 +13,6 @@ class SlotScoreCalculator:
         return [self.reels.raw_reels[(self.reels.random_num + i) % len(self.reels.raw_reels)] for i in range(3)]
 
     def calculate(self, bet):
-        raw_screen = self.reels.reels_to_screen()
-        screen = Screen(raw_screen)
+        screen = self.reels.reels_to_screen()
         self.odd = self.pay_table.get_odd(screen)
         return self.odd * bet
