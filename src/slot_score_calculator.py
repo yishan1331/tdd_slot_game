@@ -7,6 +7,7 @@ class SlotScoreCalculator:
         self.odd = 0
         self.reels = reels
         self.random_num = random_num
+        self.pay_table = PayTable()
 
     def _get_screen(self):
         try:
@@ -25,5 +26,5 @@ class SlotScoreCalculator:
 
     def calculate(self, bet):
         screen = self._get_screen()
-        self.odd = PayTable().get_odd(screen)
+        self.odd = self.pay_table.get_odd(screen)
         return self.odd * bet
