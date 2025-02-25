@@ -10,7 +10,7 @@ class PayTable:
 
     def get_odd(self, raw_screen):
         try:
-            same_line = Screen().count_straight_lines(raw_screen)
+            same_line = Screen(raw_screen).count_straight_lines()
             if same_line not in self.PAYTABLE:
                 raise RuntimeError('Unsupported lines')
             return self.PAYTABLE[same_line]
