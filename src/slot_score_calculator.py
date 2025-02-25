@@ -9,8 +9,8 @@ class SlotScoreCalculator:
         self.pay_table = pay_table
         self.reels = Reels(raw_reels, random_num)
 
-    def spin_single_reel(self, random_num):
-        return [self.reels.raw_reels[(random_num + i) % len(self.reels.raw_reels)] for i in range(3)]
+    def spin_single_reel(self):
+        return [self.reels.raw_reels[(self.reels.random_num + i) % len(self.reels.raw_reels)] for i in range(3)]
 
     def calculate(self, bet):
         raw_screen = self.reels.reels_to_screen()

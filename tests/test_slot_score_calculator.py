@@ -24,17 +24,17 @@ def test_spin_single_reel(slot_score_calculator, mock_random):
     ]
     # 測試第一個位置
     random_num = mock_random(0)
-    result = slot_score_calculator(raw_reels=reels[0]).spin_single_reel(random_num)
+    result = slot_score_calculator(raw_reels=reels[0], random_num=random_num).spin_single_reel()
     assert result == ['A', '2', '3']
     
     # 測試最後一個位置
     random_num = mock_random(2)
-    result = slot_score_calculator(raw_reels=reels[0]).spin_single_reel(random_num)
+    result = slot_score_calculator(raw_reels=reels[0], random_num=random_num).spin_single_reel()
     assert result == ['3', 'A', '2']
 
     # 測試最後一個位置
     random_num = mock_random(4)
-    result = slot_score_calculator(raw_reels=reels[0]).spin_single_reel(random_num)
+    result = slot_score_calculator(raw_reels=reels[0], random_num=random_num).spin_single_reel()
     assert result == ['2', '3', 'A']
 
 def test_lose(slot_score_calculator, mock_random):
