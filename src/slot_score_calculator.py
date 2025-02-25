@@ -1,6 +1,7 @@
 
 import random
 from .pay_table import PayTable
+from .screen import Screen
 
 class SlotScoreCalculator:
     def __init__(self, reels=None, random_num=None):
@@ -26,5 +27,5 @@ class SlotScoreCalculator:
 
     def calculate(self, bet):
         screen = self._get_screen()
-        self.odd = self.pay_table.get_odd(screen)
+        self.odd = self.pay_table.get_odd(Screen(screen))
         return self.odd * bet
