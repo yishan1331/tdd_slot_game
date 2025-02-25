@@ -6,7 +6,7 @@ class SlotScoreCalculator:
         self.reels = reels
 
     def spin_single_reel(self):
-        return [self.reels.raw_reels[(self.reels.random_num + i) % len(self.reels.raw_reels)] for i in range(3)]
+        return [self.reels.raw_reels[(self.reels.random_num[0] + i) % len(self.reels.raw_reels)] for i in range(3)]
 
     def calculate(self, bet):
         try:

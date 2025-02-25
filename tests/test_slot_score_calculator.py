@@ -44,9 +44,9 @@ def test_lose(slot_score_calculator, mock_random):
         ['A', '2', '3'],
         ['A', '2', '3'],
         ['A', '2', '3'],
-        ['2', '3', '4'],
+        ['A', '2', '3'],
     ]
-    random_num = mock_random(1)
+    random_num = mock_random([1,1,1,1,2])
     assert slot_score_calculator(PayTable(), Reels(raw_reels, random_num)).calculate(10) == 0
 
 def test_one_line(slot_score_calculator, mock_random):
