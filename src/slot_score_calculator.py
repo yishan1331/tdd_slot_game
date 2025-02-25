@@ -10,7 +10,7 @@ class SlotScoreCalculator:
         self.random_num = random_num
         self.pay_table = PayTable()
 
-    def _get_screen(self):
+    def _get_raw_screen(self):
         try:
             screen = []
             for reel in self.reels:
@@ -26,6 +26,7 @@ class SlotScoreCalculator:
         return [self.reels[(random_num + i) % len(self.reels)] for i in range(3)]
 
     def calculate(self, bet):
-        screen = self._get_screen()
-        self.odd = self.pay_table.get_odd(Screen(screen))
+        raw_screen = self._get_raw_screen()
+        screen = Screen(raw_screen)
+        self.odd = self.pay_table.get_odd(screen)
         return self.odd * bet
