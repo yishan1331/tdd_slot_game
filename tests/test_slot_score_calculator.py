@@ -1,11 +1,12 @@
 import pytest
 import random
+from src.pay_table import PayTable
 from src.slot_score_calculator import SlotScoreCalculator
 
 @pytest.fixture
 def slot_score_calculator():
-    def _slot_score_calculator(raw_reels=None, random_num=None):
-        return SlotScoreCalculator(raw_reels, random_num)
+    def _slot_score_calculator(pay_table=None, raw_reels=None, random_num=None):
+        return SlotScoreCalculator(pay_table, raw_reels, random_num)
     return _slot_score_calculator
 
 # 定義一個fixture來模擬random.randint
@@ -45,7 +46,7 @@ def test_lose(slot_score_calculator, mock_random):
         ['2', '3', '4'],
     ]
     random_num = mock_random(1)
-    assert slot_score_calculator(raw_reels=reels, random_num=random_num).calculate(10) == 0
+    assert slot_score_calculator(PayTable(), raw_reels=reels, random_num=random_num).calculate(10) == 0
 
 def test_one_line(slot_score_calculator, mock_random):
     reels = [
@@ -56,7 +57,7 @@ def test_one_line(slot_score_calculator, mock_random):
         ['A', '3', '4'],
     ]
     random_num = mock_random(1)
-    assert slot_score_calculator(reels, random_num).calculate(10) == 100
+    assert slot_score_calculator(PayTable(), reels, random_num).calculate(10) == 100
 
 def test_two_line(slot_score_calculator, mock_random):
     reels = [
@@ -67,7 +68,7 @@ def test_two_line(slot_score_calculator, mock_random):
         ['A', '2', '4'],
     ]
     random_num = mock_random(3)
-    assert slot_score_calculator(reels, random_num).calculate(10) == 400
+    assert slot_score_calculator(PayTable(), reels, random_num).calculate(10) == 400
 
 def test_three_line(slot_score_calculator, mock_random):
     reels = [
@@ -78,4 +79,4 @@ def test_three_line(slot_score_calculator, mock_random):
         ['A', '2', '3'],
     ]
     random_num = mock_random(0)
-    assert slot_score_calculator(reels, random_num).calculate(10) == 1000
+    assert slot_score_calculator(PayTable(), reels, random_num).calculate(10) == 1000
