@@ -12,7 +12,8 @@ class SlotScoreCalculator:
         try:
             screen = self.reels.reels_to_screen()
             self.odd = self.pay_table.get_odd(screen)
-            return self.odd * bet
+            win = self.odd * bet
+            return win, screen
         except Exception as error:
             print(error)
             return str(error)

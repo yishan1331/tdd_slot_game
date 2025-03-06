@@ -2,8 +2,9 @@ import pytest
 import random
 from src.pay_table import PayTable
 from src.reels import Reels
-from src.slot_score_calculator import SlotScoreCalculator
+from src.screen import Screen
 from src.random_number_generator import RandomNumberGenerator
+from src.slot_score_calculator import SlotScoreCalculator
 
 @pytest.fixture
 def slot_score_calculator():
@@ -48,7 +49,15 @@ def test_lose(slot_score_calculator, mock_random):
         ['A', '2', '3'],
     ]
     RNG = RandomNumberGenerator(mock_random([1,1,1,1,2]), raw_reels)
-    assert slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10) == 0
+    spin_result = slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10)
+    assert spin_result[0] == 0
+    assert spin_result[1].raw_screen == Screen([
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['3', 'A', '2'],
+    ]).raw_screen
 
 def test_one_line(slot_score_calculator, mock_random):
     raw_reels = [
@@ -59,7 +68,15 @@ def test_one_line(slot_score_calculator, mock_random):
         ['A', '3', '4'],
     ]
     RNG = RandomNumberGenerator(mock_random(1), raw_reels)
-    assert slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10) == 100
+    spin_result = slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10)
+    assert spin_result[0] == 100
+    assert spin_result[1].raw_screen == Screen([
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['2', '3', 'A'],
+        ['3', '4', 'A'],
+    ]).raw_screen
 
 def test_two_line(slot_score_calculator, mock_random):
     raw_reels = [
@@ -70,7 +87,15 @@ def test_two_line(slot_score_calculator, mock_random):
         ['A', '2', '4'],
     ]
     RNG = RandomNumberGenerator(mock_random(3), raw_reels)
-    assert slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10) == 400
+    spin_result = slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10)
+    assert spin_result[0] == 400
+    assert spin_result[1].raw_screen == Screen([
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '4'],
+    ]).raw_screen
 
 def test_three_line(slot_score_calculator, mock_random):
     raw_reels = [
@@ -81,4 +106,12 @@ def test_three_line(slot_score_calculator, mock_random):
         ['A', '2', '3'],
     ]
     RNG = RandomNumberGenerator(mock_random(0), raw_reels)
-    assert slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10) == 1000
+    spin_result = slot_score_calculator(PayTable(), Reels(raw_reels, RNG)).calculate(10)
+    assert spin_result[0] == 1000
+    assert spin_result[1].raw_screen == Screen([
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+        ['A', '2', '3'],
+    ]).raw_screen
