@@ -2,9 +2,9 @@ from .screen import Screen
 from .random_number_generator import RandomNumberGenerator
 
 class Reels:
-    def __init__(self, raw_reels, random_num=None):
+    def __init__(self, raw_reels, RNG):
         self.raw_reels = raw_reels
-        self.random_num = RandomNumberGenerator(random_num, raw_reels).gen_random_list()
+        self.random_num = RNG.gen_random_list()
 
     def reels_to_screen(self):
         raw_screen = []
