@@ -16,8 +16,4 @@ class RandomNumberGenerator:
                     self.random_num = random_num+[self._next_random_int(bound - 1)]*(bound-len(random_num))
 
     def _next_random_int(self, bound):
-        return random.randint(0, bound)
-
-    def gen_random_list(self):
-        return self.random_num
-        
+        return random.randint(0, bound)        
