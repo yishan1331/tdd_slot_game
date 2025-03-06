@@ -1,12 +1,14 @@
 import random
 from .screen import Screen
+from .random_number_generator import RandomNumberGenerator
 
 class Reels:
     def __init__(self, raw_reels, random_num=None):
         self.raw_reels = raw_reels
         self.random_num = random_num
+        RNG = RandomNumberGenerator()
         if random_num is None:
-            self.random_num = [random.randint(0, len(self.raw_reels) - 1) for _ in raw_reels]
+            self.random_num = [random.randint(0, RNG.next_random_int(len(self.raw_reels) - 1)) for _ in raw_reels]
         else:
             if isinstance(random_num, int):
                 self.random_num = [random_num] * len(self.raw_reels)
